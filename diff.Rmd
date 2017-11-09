@@ -7,13 +7,11 @@ output: pdf_document
 
 Assignment A4 was done as part of assignment A8. Below are the changes I made to the assignment:
 
-A4                                                               | A8
------------------------------------------------------------------|-------------------------------
-The initial code had 3 Map and 2 reduce jobs and 1 reduce job    | There is just 1 Map reduce job 
+* A4 was using 3 Map and 2 reduce jobs for calculating the mean delay for airlines and airports where the first mapper and reducer were just handeling cleaning, then second mapper would map keys and value for airline then 3rd mapper will do the same for airports and finally the 2nd reducer will calculate the mean dealy for for the outputs from 2nd and 3rd mapper and output it in 2 seperate files while A8 has just 1 map reduce job that cleans, maps key value for both airline and airport and the reducer calculates the mean delay for airlines and airports and outputs a single output file.
 
-The 1st mapper and reducer would just do the cleaning part       | The Mapper cleans and and maps the airport and airlines data
+* A4 implementation did not account for converting the arrTime, depTime, crsArrivalTime and crsDepTime into minutes which was as a result generating wrong set of airlines and airports while A8 converts the HHMM to total minutes and then does the checks and mean delay calculation.
 
-The 2nd map job maps mean delay data for airlines                | The reducer calculates the mean delay for each
-The 3rd map job maps mean delay data for airports                | The output is merged file with mean delays for airport & airlines airlines
-The 2nd reduce job generates the actual mean delay and dump it into|                                     
-2 seperate files (1 for airline and 1 for airport)     |   
+* A4 report was only comparing results of 6 recent years while A8 does for all the 30 years.
+
+* A4 took 33 minutes to run on EMR cluster while the current implementation takes 12 mins.
+

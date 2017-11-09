@@ -35,8 +35,8 @@ grp_by_airline <- aggregate(airline_data$count,by=list(airlineId=airline_data$ai
 dfMeanSorted<-arrange(grp_by_airline, desc(x))
 TopAirline=dfMeanSorted[1:5,]
 grp_by_airport <- aggregate(airport_data$count,by=list(airlineId=airport_data$airlineId), FUN=sum)
-dfMeanSorted<-arrange(grp_by_airport, desc(x))
-TopAirport=dfMeanSorted[1:5,]
+dfMeanSortedAirport<-arrange(grp_by_airport, desc(x))
+TopAirport=dfMeanSortedAirport[1:5,]
 
 
 active_airlines_table <- sqldf("select F.airlineId, F.year,F.month, F.NormalizedDelay,T.x as count from airline_data F JOIN TopAirline T where F.airlineId = T.airlineId")
@@ -57,23 +57,30 @@ active_airports_8997 <- sqldf("select * from active_airports where year in(1989,
 
 
 
-active_airlines_1987 <- sqldf("select * from active_airlines where year =2000")
-active_airports_1987 <- sqldf("select * from active_airports where year =2000")
-ggplot(active_airlines_1987,
-             aes(x=month, y=NormalizedDelay)) + geom_point(aes(fill=factor(Description), colour=factor(Description)), position = "dodge", stat="identity")+facet_wrap(~ year)+ scale_x_discrete(limits=1:12,breaks=seq(0,12,3)) + theme(legend.position="top")
+grp_by_airline <- aggregate(airline_data$count,by=list(airlineId=airline_data$airlineId), FUN=sum)
+dfMeanSorted<-arrange(grp_by_airline, desc(x))
+TopAirlineAfter=dfMeanSorted[1:6,]
+active_airlines_tableAfter <- sqldf("select F.airlineId, F.year,F.month, F.NormalizedDelay,T.x as count from airline_data F JOIN TopAirlineAfter T where F.airlineId = T.airlineId and year>2009")
+active_airlinesAfter <- sqldf("select N.Description, F.airlineId, F.year, F.month, F.NormalizedDelay, F.count from active_airlines_tableAfter F JOIN airline_id N where N.Code = F.airlineId")
 
 
-ggplot(active_airports_1987,
-             aes(x=month, y=NormalizedDelay)) + geom_point(aes(fill=factor(Description), colour=factor(Description)), position = "dodge", stat="identity")+facet_wrap(~ year)+ scale_x_discrete(limits=1:12,breaks=seq(0,12,3)) + theme(legend.position="top")
-
-active_airlines_1988 <- sqldf("select * from active_airlines where year =2012")
-active_airports_1988 <- sqldf("select * from active_airports where year =2012")
-ggplot(active_airlines_1988,
-             aes(x=month, y=NormalizedDelay)) + geom_point(aes(fill=factor(Description), colour=factor(Description)), position = "dodge", stat="identity")+facet_wrap(~ year)+ scale_x_discrete(limits=1:12,breaks=seq(0,12,3)) + theme(legend.position="top")
-
-
+active_airports_1988 <- sqldf("select * from active_airports where year =1992")
+active_airports_1989 <- sqldf("select * from active_airports where year =1993")
 ggplot(active_airports_1988,
-             aes(x=month, y=NormalizedDelay)) + geom_point(aes(fill=factor(Description), colour=factor(Description)), position = "dodge", stat="identity")+facet_wrap(~ year)+ scale_x_discrete(limits=1:12,breaks=seq(0,12,3)) + theme(legend.position="top")
+             aes(x=month, y=NormalizedDelay)) + geom_bar(aes(fill=factor(Description), colour=factor(Description)), position = "dodge", stat="identity")+facet_wrap(~ year)+ scale_x_discrete(limits=1:12,breaks=seq(0,12,3)) + theme(legend.position="top")
+
+
+ggplot(active_airports_1989,
+             aes(x=month, y=NormalizedDelay)) + geom_bar(aes(fill=factor(Description), colour=factor(Description)), position = "dodge", stat="identity")+facet_wrap(~ year)+ scale_x_discrete(limits=1:12,breaks=seq(0,12,3)) + theme(legend.position="top")
+
+active_airports_1990 <- sqldf("select * from active_airports where year =1994")
+active_airports_1991 <- sqldf("select * from active_airports where year =1991")
+ggplot(active_airports_1990,
+             aes(x=month, y=NormalizedDelay)) + geom_bar(aes(fill=factor(Description), colour=factor(Description)), position = "dodge", stat="identity")+facet_wrap(~ year)+ scale_x_discrete(limits=1:12,breaks=seq(0,12,3)) + theme(legend.position="top")
+
+
+ggplot(active_airports_1991,
+             aes(x=month, y=NormalizedDelay)) + geom_bar(aes(fill=factor(Description), colour=factor(Description)), position = "dodge", stat="identity")+facet_wrap(~ year)+ scale_x_discrete(limits=1:12,breaks=seq(0,12,3)) + theme(legend.position="top")
 
 #ggplot(active_airlines_715,
 #             aes(x=month, y=NormalizedDelay)) + geom_point(aes(fill=factor(Description), colour=factor(Description)), position = "dodge", stat="identity")+facet_wrap(Description ~ year)+ scale_x_discrete(limits=1:12,breaks=seq(0,12,3)) + theme(legend.position="top")
@@ -103,7 +110,39 @@ ggplot(active_airports_1988,
 
 ```
 
-The Plots 1-? represent the Normalized delay for the Top 5 airlines. The available data is from Dec 1987 to Oct 2015. For the period 1988 to 1990 US Airways topped the list for delays, however towards the end of 1990 Southwest and Delta were more delayed. Thereafter, for a majority period from 1991 to 1998 Delta was the most delayed flight, closely follwed by Southwest and US airways. It is interesting to note that **Northwest Airlines** was the least delayed among these 5 top airlines from 1987 to 2004 but after 2004 it topped the list for delays till the time it was merged with Delta airlines in 2010 Jan due to bankcruptcy and closed down operations as Northwest in 2009 Dec. After 1998 Southwest has topped the list for delays among the other 4 airlines. Another point to note is that the airlines are the most delayed during the month of december (this could be because of holiday season).
+
+```{r}
 
 
-The Plots 1-? represent the Normalized delay for the Top 5 airports. The available data is from Dec 1987 to Oct 2015. For the period 1988 to 1990 US Airways topped the list for delays, however towards the end of 1990 Southwest and Delta were more delayed. Thereafter, for a majority period from 1991 to 1998 Delta was the most delayed flight, closely follwed by Southwest and US airways. It is interesting to note that **Northwest Airlines** was the least delayed among these 5 top airlines from 1987 to 2004 but after 2004 it topped the list for delays till the time it was merged with Delta airlines in 2010 Jan due to bankcruptcy and closed down operations as Northwest in 2009 Dec. After 1998 Southwest has topped the list for delays among the other 4 airlines. Another point to note is that the airlines are the most delayed during the month of december (this could be because of holiday season).
+
+grp_by_airline <- aggregate(airline_data$count,by=list(airlineId=airline_data$airlineId), FUN=sum)
+dfMeanSortedAfter<-arrange(grp_by_airline, desc(x))
+TopAirlineAfter=dfMeanSortedAfter[1:6,]
+active_airlines_tableAfter <- sqldf("select F.airlineId, F.year,F.month, F.NormalizedDelay,T.x as count from airline_data F JOIN TopAirlineAfter T where F.airlineId = T.airlineId and year>2009")
+active_airlinesAfter <- sqldf("select N.Description, F.airlineId, F.year, F.month, F.NormalizedDelay, F.count from active_airlines_tableAfter F JOIN airline_id N where N.Code = F.airlineId")
+
+
+
+
+```
+The Plots 1-? represent the Normalized delay for the Top 5 airlines. The available data is from Dec 1987 to Oct 2015. For the period 1987 to 1990 US Airways topped the list for delays, however towards the end of 1990 Southwest and Delta were more delayed. Thereafter, for a majority period from 1991 to 1998 Delta was the most delayed flight, closely follwed by Southwest and US airways. It is interesting to note that **Northwest Airlines** was the least delayed among these 5 top airlines from 1987 to 2004 but after 2004 it topped the list for delays till 2009. It can be seen that after 2009 Northwest Airlines does not appear in the graph as it was merged with Delta airlines in 2010 Jan due to bankcruptcy and closed down operations as Northwest in 2009 Dec.
+
+After 1998 Southwest has topped the list for delays among airlines while American Airlines which appeared in the top 5 busiest airlines after NorthWest stopped its services has the least delay among the set.
+
+It was also noticed that after 2011 the mean delays for all the airlines have reduced considerably.
+
+
+The Plots 1-? represent the Normalized delay for the Top 5 airports. The top 5 busiest airports are: **Hartsfield-Jackson Atlanta International, Chicago O'Hare International, Los Angeles, CA: Los Angeles International, Phoenix Sky Harbor International and Denver International Airport**. The available data is from Dec 1987 to Oct 2015. For the period 1987 to 1996 `Hartsfield-Jackson Atlanta International` Airport was the airport with most delays however after 1996 `Chicago O'Hare International` Airport has been the most prominent out of the top 5 busiest airports. `Denver International Airport` was the one with least delays among the top 5 busiest airports till 2010 however post that `Phoenix Sky Harbor International Airport` has the minimum delays out of the set.  
+
+
+#### Conclusion
+
+The exercise helped in observing few interesting facts. 
+
+Delta Airlines was the most delayed airline from 1991 to 1998 but post that Southwest airline has been the most delayed airline among the top 5 busiest airlines while NorthWest was the one with minimum delays in the set till 2004 and after it merged with delta, American Airlines joined the group of top 5 busiest airlines and had the least delay.
+
+NorthWest Airline was one of the top 5 busiest airline and also had minimum delays among the this set but close to the year when it was shut down the mean delay of the airline grew with it being the one with most delays in the years 2005-2009.
+
+The mean delays for the airlines were considerably reduced after 2011.
+
+It was noticed that the maximum delays for all airlines and airports were in the month of `December` which could primarily be because of December being the holiday month, most people travel during that time. Additionally, `September` has the least number of delays which could be because schools reopen after summer vacations and less people travel then. 

@@ -28,15 +28,15 @@ jar:
 run:
 	$(HADOOP_HOME)/bin/hdfs dfs -mkdir -p output
 	$(HADOOP_HOME)/bin/hadoop jar out/airportAirlineDelay.jar -input=input/airline/*.csv -output=output/a8/
-	#$(HADOOP_HOME)/bin/hadoop fs -getmerge output/a8/DataCleaning output/results.csv
+	$(HADOOP_HOME)/bin/hadoop fs -getmerge output/a8/DataCleaning output/results.csv
 
 merge: $(HADOOP_HOME)/bin/hadoop fs -getmerge output/a8/DataCleaning output/results.csv
 #	Rscript -e "rmarkdown::render('report.Rmd')
 	
 run_small:
 	$(HADOOP_HOME)/bin/hdfs dfs -mkdir -p output_small
-	$(HADOOP_HOME)/bin/hadoop jar out/airportAirlineDelay.jar -input=input_small/airline/*.csv -output=output_small/a8/
-	#$(HADOOP_HOME)/bin/hadoop fs -getmerge output_small/a8/DataCleaning output_small/results.csv
+	$(HADOOP_HOME)/bin/hadoop jar out/airportAirlineDelay.jar -input=input/323.csv -output=output_small/a8/
+	$(HADOOP_HOME)/bin/hadoop fs -getmerge output_small/a8/DataCleaning output_small/results.csv
 
 merge_small:
 	$(HADOOP_HOME)/bin/hadoop fs -getmerge output_small/a8/DataCleaning output_small/results.csv

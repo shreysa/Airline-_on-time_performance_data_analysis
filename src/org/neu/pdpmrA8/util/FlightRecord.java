@@ -82,37 +82,37 @@ public class FlightRecord {
     }
 
     private void getColVal(CSVRecord r) throws NumberFormatException {
-        year = parseInt(r.get(0));
-        month = parseInt(r.get(2));
-        airlineId = parseInt(r.get(7));
-        originAirportId = parseInt(r.get(11));
-        originAirportSeqId = parseInt(r.get(12));
-        originCityMarketId = parseInt(r.get(13));
+        year = Integer.parseInt(r.get(0));
+        month = Integer.parseInt(r.get(2));
+        airlineId = Integer.parseInt(r.get(7));
+        originAirportId = Integer.parseInt(r.get(11));
+        originAirportSeqId = Integer.parseInt(r.get(12));
+        originCityMarketId = Integer.parseInt(r.get(13));
         origin = r.get(14);
         originCityName = r.get(15);
         originStateAbr = r.get(16);
-        originStateFips = parseInt(r.get(17));
+        originStateFips = Integer.parseInt(r.get(17));
         originStateNm = r.get(18);
-        originWac = parseInt(r.get(19));
-        destAirportId = parseInt(r.get(20));
-        destAirportSeqId = parseInt(r.get(21));
-        destCityMarketId = parseInt(r.get(22));
+        originWac = Integer.parseInt(r.get(19));
+        destAirportId = Integer.parseInt(r.get(20));
+        destAirportSeqId = Integer.parseInt(r.get(21));
+        destCityMarketId = Integer.parseInt(r.get(22));
         dest = r.get(23);
         destCityName = r.get(24);
         destStateAbr = r.get(25);
-        destStateFips = parseInt(r.get(26));
+        destStateFips = Integer.parseInt(r.get(26));
         destStateNm = r.get(27);
-        destWac = parseInt(r.get(28));
+        destWac = Integer.parseInt(r.get(28));
         crsDepTime = getTimeInMinutes(r.get(29));
         depTime = getTimeInMinutes(r.get(30));
         crsArrTime = getTimeInMinutes(r.get(40));
         arrTime = getTimeInMinutes(r.get(41));
-        arrDelay = parseFloat(r.get(42));
-        arrDelayNew = parseFloat(r.get(43));
-        arrDel15 = parseBoolean("" + parseFloat(r.get(44)));
+        arrDelay = (int) Float.parseFloat(r.get(42));
+        arrDelayNew = (int) Float.parseFloat(r.get(43));
+        arrDel15 = parseBoolean("" + (int) Float.parseFloat(r.get(44)));
         cancelled = parseBoolean(r.get(47));
-        crsElapsedTime = parseFloat(r.get(50));
-        actualElapsedTime = parseFloat(r.get(51));
+        crsElapsedTime = (int) Float.parseFloat(r.get(50));
+        actualElapsedTime = (int) Float.parseFloat(r.get(51));
  }
 
     private boolean isNotValid(String s) {
@@ -120,21 +120,15 @@ public class FlightRecord {
     }
 
     private int getTimeInMinutes(String time){
-        int actTime = parseInt(time);
-        return  (((int)(actTime * .01)) * 60) + (actTime % 100);
+        int actTime = Integer.parseInt(time);
+        return  (((int)(actTime/ 100)) * 60) + (actTime % 100);
     }
     private void setNormalizedDelay() {
         if (cancelled) normalizedDelay = 4f;
         else normalizedDelay = ((float) arrDelayNew) / crsElapsedTime;
     }
 
-    private int parseInt(String yearS) throws NumberFormatException {
-        return Integer.parseInt(yearS);
-    }
 
-    private int parseFloat(String yearS) throws NumberFormatException {
-        return (int) Float.parseFloat(yearS);
-    }
 
     private boolean parseBoolean(String boolS) throws NumberFormatException {
         int boolI = Integer.parseInt(boolS);
