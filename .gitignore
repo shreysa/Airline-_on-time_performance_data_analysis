@@ -1,0 +1,8 @@
+input/*
+*.iml
+out/
+.idea
+.DS_Store
+output/dataCleaning
+test/*
+*.jar

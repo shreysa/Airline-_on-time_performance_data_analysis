@@ -1,0 +1,19 @@
+---
+title: "Changes to original Assignment A4"
+author: "Shreysa Sharma"
+date: "11/9/2017"
+output: pdf_document
+---
+
+Assignment A4 was done as part of assignment A8. Below are the changes I made to the assignment:
+
+A4                                                               | A8
+-----------------------------------------------------------------|-------------------------------
+The initial code had 3 Map and 2 reduce jobs and 1 reduce job    | There is just 1 Map reduce job 
+
+The 1st mapper and reducer would just do the cleaning part       | The Mapper cleans and and maps the airport and airlines data
+
+The 2nd map job maps mean delay data for airlines                | The reducer calculates the mean delay for each
+The 3rd map job maps mean delay data for airports                | The output is merged file with mean delays for airport & airlines airlines
+The 2nd reduce job generates the actual mean delay and dump it into|                                     
+2 seperate files (1 for airline and 1 for airport)     |   
