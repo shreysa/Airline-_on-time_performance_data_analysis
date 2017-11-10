@@ -69,13 +69,20 @@ Furthermore, **Northwest Airlines** was the least delayed among these 5 top airl
 
 
 ##### Plot 3: Top 5 most Active Airports in the period 1988-2003 with their Mean Delay
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=15, fig.height= 12}
 
 ggplot(active_airports_803,mapping = 
              aes(x=month, y=NormalizedDelay)) + geom_point(aes(fill=factor(AirName), colour=factor(AirName)), position = "dodge", stat="identity")+facet_wrap(~year)+ scale_x_discrete(limits=1:12,breaks=seq(0,12,6)) + theme(legend.position="top")
 ```
 
-The Plots 3 and 4 represent the Normalized delay for the Top 5 airports for the period 1988 to 2015. The top 5 busiest airports are: **Hartsfield-Jackson Atlanta International, Chicago O'Hare International, Los Angeles, CA: Los Angeles International, Phoenix Sky Harbor International and Denver International Airport**. For the period 1987 to 1996 `Hartsfield-Jackson Atlanta International` Airport was the one with most delays however after 1996 `Chicago O'Hare International` Airport has been the most prominent in terms of delays out of the top 5 busiest airports. `Denver International Airport` was the one with least delays among these till 2010 however post that `Phoenix Sky Harbor International Airport` has the minimum delays out of the set. 
+The Plots 3 and 4 represent the Normalized delay for the Top 5 airports for the period 1988 to 2015. The top 5 busiest airports are: **Hartsfield-Jackson Atlanta International, Chicago O'Hare International, Los Angeles, CA: Los Angeles International, Phoenix Sky Harbor International and Denver International Airport**. For the period 1987 to 1996 `Hartsfield-Jackson Atlanta International` Airport was the one with most delays however after 1996 `Chicago O'Hare International` Airport has been the most prominent in terms of delays out of the top 5 busiest airports.
+
+`Denver International Airport` was the one with least delays among these till 2010 however post that `Phoenix Sky Harbor International Airport` has the minimum delays out of the set. 
+
+In the current implementation of the code, I converted the CRSDeptTime, CRSArrTime, DepTime and ArrTime from the format HHMM to minutes and got the above results. The original implementation in A4 lacked this and due to that we were getting wrong and different results for the top 5 most active airlines as well as the airports.
+
+\newpage
 
 
 

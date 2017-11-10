@@ -13,5 +13,5 @@ Assignment A4 was done as part of assignment A8. Below are the changes I made to
 
 * A4 report was only comparing results of 6 recent years while A8 does for all the 30 years.
 
-* A4 took 33 minutes to run on EMR cluster while the current implementation takes 12 mins.
+* A4 took 33 minutes to run on EMR cluster while the current implementation takes 14.3 mins on AWS.
 
