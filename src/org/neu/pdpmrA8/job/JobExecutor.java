@@ -18,6 +18,7 @@ import java.io.IOException;
 
 /**
  * @author shreysa
+ * Class to set initiate the and run the mapper and reducer and output the result
  */
 public class JobExecutor extends Configured implements Tool {
 

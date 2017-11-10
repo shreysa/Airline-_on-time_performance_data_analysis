@@ -1,4 +1,7 @@
 package org.neu.pdpmrA8.reducer;
+/*
+ @author shreysa
+ */
 
 import org.apache.hadoop.io.FloatWritable;
 import org.apache.hadoop.io.Text;
@@ -6,19 +9,19 @@ import org.apache.hadoop.mapreduce.Reducer;
 import java.io.IOException;
 
 /**
- * @author shreysa
+ *
+ * Read input line by line where each line is of following format.
+ * key: Text<F, airlineId, year, month> or Text<A, AirportId, year, month>
+ * value: FloatWritable<normalizedDelay>
+ *
+ * Transform above input into following format.
+ * key: (airlineId, year, month) or (airportId, year, month)
+ * value: type, totalMeanDelay,count
+ * here type is 0 for airline and 1 for airport
  */
+
 public class AirlineAirportReducer extends Reducer<Text, FloatWritable, Text, Text> {
-    /**
-     * Read input by line where each line is of following format.
-     * key: Text<F, airlineId, year> or Text<A, AirportId, year>
-     * value: Text<month, normalizedDelay>
-     *
-     * Transform above input into following format.
-     * key: (airlineId, year) or (airportId, year)
-     * value: type, totalMeanDelay, meanDelayJan, meanDelayFeb...meanDelayDec
-     * here type is 0 for airline and 1 for airport
-     */
+
 
     public static final String sep = ",";
     public static final String airportSubKey = "A";

@@ -128,8 +128,6 @@ public class FlightRecord {
         else normalizedDelay = ((float) arrDelayNew) / crsElapsedTime;
     }
 
-
-
     private boolean parseBoolean(String boolS) throws NumberFormatException {
         int boolI = Integer.parseInt(boolS);
         if (boolI == 0) return false;
@@ -140,7 +138,6 @@ public class FlightRecord {
     public boolean isParsed() {
         return isParsed;
     }
-
 
     public Integer getAirlineId() {
         return airlineId;
