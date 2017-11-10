@@ -18,7 +18,7 @@ jar:
 
 run:
 	$(HADOOP_HOME)/bin/hdfs dfs -mkdir -p output
-	$(HADOOP_HOME)/bin/hadoop jar out/airportAirlineDelay.jar -input=input/airline/*.csv -output=output/a8/
+	$(HADOOP_HOME)/bin/hadoop jar out/airportAirlineDelay.jar -input=input/*.csv -output=output/a8/
 	$(HADOOP_HOME)/bin/hadoop fs -getmerge output/a8/DataCleaning output/results.csv
 	Rscript -e 'library(rmarkdown); rmarkdown::render("./report.Rmd", "pdf_document")'
 

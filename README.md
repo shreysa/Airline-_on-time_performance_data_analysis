@@ -14,5 +14,7 @@ sqldf
 
 Step 1. Clone the repository and Open the makefile and replace the HADOOP_HOME path with your own HADOOP_HOME path.
 
-Step 2. Issue `make all`
+Step 2. Create an input folder and place the input files in this folder
+
+Step 3: Issue `make all`
 

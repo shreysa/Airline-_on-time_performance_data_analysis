@@ -4,9 +4,7 @@ title: "Shreysa A8 Assignment"
 output:
   pdf_document: default
 ---
-```{r setup, echo=FALSE, results='hide',message=FALSE, warning=FALSE, cache=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = normalizePath(getwd()))
+```{r setup, echo=FALSE, results='hide',message=FALSE, warning=FALSE}
 ```
 
 ## Summary of the Program Design
@@ -98,7 +96,7 @@ ggplot(active_airports_415,mapping =
 
 The exercise helped in observing few interesting facts:
 
-* The job took **14.3 minutes to execute on AWS EMR c4.large** machine. 
+* The job took **14.3 minutes to execute on AWS EMR m4.xlarge** machine. 
 
 * `Delta Airlines` was the most delayed airline from 1991 to 1998 but post that `Southwest airline` has been the most delayed airline among the top 5 busiest airlines while `NorthWest` was the one with minimum delays in the set till 2004 and after it merged with delta.
 
