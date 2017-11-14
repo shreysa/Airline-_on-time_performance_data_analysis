@@ -24,7 +24,7 @@ run:
 
 run_small:
 	$(HADOOP_HOME)/bin/hdfs dfs -mkdir -p output_small
-	$(HADOOP_HOME)/bin/hadoop jar out/airportAirlineDelay.jar -input=input/323.csv -output=output_small/a8/
+	$(HADOOP_HOME)/bin/hadoop jar out/airportAirlineDelay.jar -input=323.csv -output=output_small/a8/
 	$(HADOOP_HOME)/bin/hadoop fs -getmerge output_small/a8/DataCleaning output_small/results.csv
 
 clean:

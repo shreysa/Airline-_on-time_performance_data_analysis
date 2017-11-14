@@ -31,8 +31,6 @@ public class AirlineAirportReducer extends Reducer<Text, FloatWritable, Text, Te
             throws IOException, InterruptedException {
         int count = 1;
         float delaySum = 0f;
-        float[] monthDelaySum = new float[13];
-        int[] monthCount = new int[13];
         Text resultKey = new Text();
         Text resultValue = new Text();
 
